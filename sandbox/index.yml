@@ -32,3 +32,8 @@ sections:
       href: githubbot
       image:
         src: https://docs.microsoft.com/azure/media/index/bot-service.svg
+    - title: NotHotdog
+      html: <p>Is it a hotdog or not? Let Cognitive Services decide.</p>
+      href: nothotdog
+      image:
+        src: https://docs.microsoft.com/azure/media/index/bot-service.svg
