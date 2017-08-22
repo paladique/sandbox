@@ -27,14 +27,10 @@ If you're familiar with [HBO's Silicon Valley](http://www.hbo.com/silicon-valley
 * [NotHotdogFunc Repo](https://github.com/BrianPeek/NotHotdogFunc)
 
 ## What's It Do?
-Give the Azure Function a URL to an image, or POST the image data, and it will return the string **true** or **false**.  Simple!
-
-You can see a demo below.
-
-![demo](media/nothotdog/demo.gif)
+Give the Azure Function a URL to an image, or POST the image data, and it will return a JSON payload stating whether the picture is a hotdog or not.
 
 ## Configuration
-Setting this up is pretty simple.
+There are two parts to settings this up to try out:
 
 ### Computer Vision API
 To use the Computer Vision API, you will need an endpoint and key.
@@ -56,6 +52,8 @@ If you have already used up your trial for the Computer Vision API, you can regi
 
 The function application will be deployed and the GitHub repo above will be setup in the App Service as the deployment source.  Additionally, the key and endpoint you entered will be automatically configured.
 
+Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 15.3 or higher, with the Azure Development workload installed.  For more information, see [this post](https://blogs.msdn.microsoft.com/webdev/2017/05/10/azure-function-tools-for-visual-studio-2017/).
+
 ## How to Run
 The Azure Function is now configured and running, and will be available at https://&lt;sitename&gt;.azurewebsites.net/api/NotHotdogFunc .  As an example, let's use [cURL](https://curl.haxx.se/) to hit the endpoint in both ways:
 
@@ -70,17 +68,42 @@ curl http://<sitename>.azurewebsites.net/api/NotHotdog?url=https://upload.wikime
 
 ### POST image data
 ```
-curl --data-binary "@hotdog.jpg" http://<sitename>.azurewebsites.net/api/NotHotdog
+curl --data-binary "@not-a-hotdog.jpg" http://<sitename>.azurewebsites.net/api/NotHotdog
 ```
 
 ```json
-"{\"isHotdog\":\"true\"}"
+"{\"isHotdog\":\"false\"}"
 ```
 
 Of course, you could call this from a web-based back-end, a mobile app, or anything else.  Simply hit the endpoint in either way and parse the JSON response.
 
 ## How it Works
-The code for the function is quite simple.  
+The code for the function is only a few lines.  Here's a very condensed version (see the [source code](https://github.com/BrianPeek/NotHotdogFunc/blob/master/NotHotdog.cs) for the full version):
+
+```csharp
+[FunctionName("NotHotdog")]
+public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
+{
+	// grab the key and URI from the portal config
+	string visionKey = Environment.GetEnvironmentVariable("VisionKey");
+	string visionUri = Environment.GetEnvironmentVariable("VisionUri");
+
+	// create a client and request Tags for the image submitted
+	VisionServiceClient vsc = new VisionServiceClient(visionKey, visionUri);
+	VisualFeature[] vf = { VisualFeature.Tags };
+	AnalysisResult result = null;
+
+	// get the image data POST'ed to us
+	Stream stream = await req.Content.ReadAsStreamAsync();
+
+	// ask Computer Vision API to analyze it
+	result = await vsc.AnalyzeImageAsync(stream, vf);
+
+	// check if a "hotdog" tag is returned
+	if(result.Tags.Select(tag => tag.Name.ToLowerInvariant()).Contains("hotdog"))
+		return GetResponse(req, true);
+}
+```
 
 ## Next Steps
 Here are links to the docs for the items discussed above.  Play around with the project and feel free to leave comments on the article, [open issues](https://github.com/BrianPeek/NotHotdogFunc/issues) in the repo, or submit [pull requests](https://github.com/BrianPeek/NotHotdogFunc/pulls) with fixes and new features.  Enjoy!
