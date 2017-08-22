@@ -52,7 +52,20 @@ If you have already used up your trial for the Computer Vision API, you can regi
 
 The function application will be deployed and the GitHub repo above will be setup in the App Service as the deployment source.  Additionally, the key and endpoint you entered will be automatically configured.
 
-Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 15.3 or higher, with the Azure Development workload installed.  For more information, see [this post](https://blogs.msdn.microsoft.com/webdev/2017/05/10/azure-function-tools-for-visual-studio-2017/).
+### Running Locally
+Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 15.3 or higher, with the Azure Development workload installed.  For more information, see [this post](https://blogs.msdn.microsoft.com/webdev/2017/05/10/azure-function-tools-for-visual-studio-2017/).  Note that if you opt to run locally, you will need to create a **local.settings.json** file in the same directory as the function with your endpoint and API keys.  Here's an example -- simply fill in the VisionKey and VisionUri with the values given to you by the service, and leave the rest blank.
+
+```json
+{
+	"IsEncrypted": false,
+	"Values": {
+		"AzureWebJobsStorage": "",
+		"AzureWebJobsDashboard": "",
+		"VisionKey": "<your API key>",
+		"VisionUri": "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0"
+	}
+}
+```
 
 ## How to Run
 The Azure Function is now configured and running, and will be available at https://&lt;sitename&gt;.azurewebsites.net/api/NotHotdogFunc .  As an example, let's use [cURL](https://curl.haxx.se/) to hit the endpoint in both ways:
@@ -110,4 +123,4 @@ Here are links to the docs for the items discussed above.  Play around with the 
 
 * [Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/)
 * [Vision API](https://docs.microsoft.com/azure/cognitive-services/computer-vision/)
-* Check out [NotBacon](/nothotdog) for a variant of this using the Custom Vision Service trained with images of bacon!
+* Check out [NotBacon](/notbacon) for a variant of this using the Custom Vision Service trained with images of bacon!

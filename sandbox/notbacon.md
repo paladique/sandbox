@@ -133,6 +133,6 @@ Here are links to the docs for the items discussed above.  Play around with the 
 
 * Custom Vision Service [documentation](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/home)
 * How to [Improve your classifier](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/getting-started-improving-your-classifier)
-
+* Check out [NotHotdog](/nothotdog) for a variant of this using the Computer Vision API without any training.
 
 [List of images used for training](https://github.com/anthonychu/not-bacon/blob/master/cc-attributions.md)
