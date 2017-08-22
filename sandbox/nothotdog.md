@@ -22,6 +22,7 @@ If you're familiar with [HBO's Silicon Valley](http://www.hbo.com/silicon-valley
 
 ## Requirements
 * An [Azure](https://azure.microsoft.com/en-us/free/) account
+* To build and test locally, [Visual Studio 2017](https://visualstudio.com) version 15.3 or higher
 
 ## Links
 * [NotHotdogFunc Repo](https://github.com/BrianPeek/NotHotdogFunc)
@@ -33,7 +34,7 @@ Give the Azure Function a URL to an image, or POST the image data, and it will r
 There are two parts to settings this up to try out:
 
 ### Computer Vision API
-To use the Computer Vision API, you will need an endpoint and key.
+To use the [Computer Vision API](https://docs.microsoft.com/azure/cognitive-services/computer-vision/), you will need an endpoint and key.
 
 1. Browse to the [Cognitive Services API portal](https://azure.microsoft.com/try/cognitive-services/my-apis/), logging in if necessary.
 1. Click the **Get API Key** button in the **Computer Vision API** section.
@@ -53,7 +54,7 @@ If you have already used up your trial for the Computer Vision API, you can regi
 The function application will be deployed and the GitHub repo above will be setup in the App Service as the deployment source.  Additionally, the key and endpoint you entered will be automatically configured.
 
 ### Running Locally
-Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 15.3 or higher, with the Azure Development workload installed.  For more information, see [this post](https://blogs.msdn.microsoft.com/webdev/2017/05/10/azure-function-tools-for-visual-studio-2017/).  Note that if you opt to run locally, you will need to create a **local.settings.json** file in the same directory as the function with your endpoint and API keys.  Here's an example -- simply fill in the VisionKey and VisionUri with the values given to you by the service, and leave the rest blank.
+Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 15.3 or higher, with the Azure Development workload installed.  For more information, see [the docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs).  Note that if you opt to run locally, you will need to create a **local.settings.json** file in the same directory as the function with your endpoint and API keys.  Here's an example -- simply fill in the **VisionKey** and **VisionUri** with the values given to you by the service, and leave the rest blank.
 
 ```json
 {
@@ -103,7 +104,9 @@ Finally, select the [trigger](https://docs.microsoft.com/azure/azure-functions/f
 
 ![new function](media/nothotdog/new-function.png)
 
-Of course, this was already done in the [sample project](https://github.com/BrianPeek/NotHotdogFunc), and a function named **NotHotdog** was created.  The code for the function is only a few lines.  Here's a very condensed version (see the [source code](https://github.com/BrianPeek/NotHotdogFunc/blob/master/NotHotdog.cs) for the full version).
+For more details on these tools, please see the [official docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs).
+
+The steps above have already done in the [sample project](https://github.com/BrianPeek/NotHotdogFunc), and a function named **NotHotdog** was created.  The code for the function is only a few lines.  Here's a very condensed version (see the [source code](https://github.com/BrianPeek/NotHotdogFunc/blob/master/NotHotdog.cs) for the full version).
 
 ```csharp
 [FunctionName("NotHotdog")]
@@ -134,5 +137,5 @@ public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLeve
 Here are links to the docs for the items discussed above.  Play around with the project and feel free to leave comments on the article, [open issues](https://github.com/BrianPeek/NotHotdogFunc/issues) in the repo, or submit [pull requests](https://github.com/BrianPeek/NotHotdogFunc/pulls) with fixes and new features.  Enjoy!
 
 * [Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/)
-* [Vision API](https://docs.microsoft.com/azure/cognitive-services/computer-vision/)
+* [Computer Vision API](https://docs.microsoft.com/azure/cognitive-services/computer-vision/)
 * Check out [NotBacon](/notbacon) for a variant of this using the Custom Vision Service trained with images of bacon!
