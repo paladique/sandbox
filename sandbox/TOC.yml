@@ -6,5 +6,7 @@
       items:
       - name: GitHubBot
         href: /sandbox/githubbot
+      - name: NotBacon
+        href: /sandbox/notbacon
       - name: NotHotdog
         href: /sandbox/nothotdog
