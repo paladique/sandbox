@@ -91,7 +91,19 @@ curl --data-binary "@not-a-hotdog.jpg" http://<sitename>.azurewebsites.net/api/N
 Of course, you could call this from a web-based back-end, a mobile app, or anything else.  Simply hit the endpoint in either way and parse the JSON response.
 
 ## How it Works
-The code for the function is only a few lines.  Here's a very condensed version (see the [source code](https://github.com/BrianPeek/NotHotdogFunc/blob/master/NotHotdog.cs) for the full version):
+This Azure Function was created with the new Visual Studio 2017 Tools for Azure Functions included with the 15.3 update.  To create a new Function, ensure the Azure Development workload is installed and then create a new Azure Functions project:
+
+![new project](media/nothotdog/new-project.png)
+
+After the project is created, right-click on the project and select **Add > New Item...** from the context menu, then select **Azure Function** from the window that pops up, giving it a new name.
+
+![new item](media/nothotdog/new-item.png)
+
+Finally, select the [trigger](https://docs.microsoft.com/azure/azure-functions/functions-triggers-bindings) action, in this case **Http trigger**, and select the authorization type.
+
+![new function](media/nothotdog/new-function.png)
+
+Of course, this was already done in the [sample project](https://github.com/BrianPeek/NotHotdogFunc), and a function named **NotHotdog** was created.  The code for the function is only a few lines.  Here's a very condensed version (see the [source code](https://github.com/BrianPeek/NotHotdogFunc/blob/master/NotHotdog.cs) for the full version).
 
 ```csharp
 [FunctionName("NotHotdog")]
