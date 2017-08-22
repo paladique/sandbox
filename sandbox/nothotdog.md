@@ -54,7 +54,7 @@ If you have already used up your trial for the Computer Vision API, you can regi
 The function application will be deployed and the GitHub repo above will be setup in the App Service as the deployment source.  Additionally, the key and endpoint you entered will be automatically configured.
 
 ### Running Locally
-Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 15.3 or higher, with the Azure Development workload installed.  For more information, see [the docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs).  Note that if you opt to run locally, you will need to create a **local.settings.json** file in the same directory as the function with your endpoint and API keys.  Here's an example -- simply fill in the **VisionKey** and **VisionUri** with the values given to you by the service, and leave the rest blank.
+Alternatively, you can clone the [repo](https://github.com/BrianPeek/NotHotdogFunc) and run the project locally.  This requires Visual Studio 2017 version 15.3 or higher, with the Azure Development workload installed.  For more information, see [the docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs).  Note that if you opt to run locally, you will need to create a **local.settings.json** file in the same directory as the function with your endpoint and API keys.  Here's an example -- simply fill in the **VisionKey** and **VisionUri** with the values given to you by the service, and leave the rest blank.
 
 ```json
 {
@@ -105,6 +105,8 @@ Finally, select the [trigger](https://docs.microsoft.com/azure/azure-functions/f
 ![new function](media/nothotdog/new-function.png)
 
 For more details on these tools, please see the [official docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs).
+
+Additionally, a NuGet reference was set to the [Microsoft.ProjectOxford.Vision](https://www.nuget.org/packages/Microsoft.ProjectOxford.Vision/) package, which contains the API to call the Computer Vision API from .NET.
 
 The steps above have already done in the [sample project](https://github.com/BrianPeek/NotHotdogFunc), and a function named **NotHotdog** was created.  The code for the function is only a few lines.  Here's a very condensed version (see the [source code](https://github.com/BrianPeek/NotHotdogFunc/blob/master/NotHotdog.cs) for the full version).
 
